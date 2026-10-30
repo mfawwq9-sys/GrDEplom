@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> الأمين الإجتماعي | جمعية دبلوم علوم الحاسوب</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons & Google Fonts: Cairo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            color: #f1f5f9;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #047857 100%);
+        }
+        .tab-btn.active {
+            background-color: #059669;
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="gradient-header text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3 text-center md:text-right w-full md:w-auto justify-between md:justify-start">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <div class="text-right">
+                            <h1 class="text-xl sm:text-2xl font-bold tracking-wide">بوابة الأمين الاجتماعي</h1>
+                            <p class="text-xs sm:text-sm text-emerald-300 font-medium">جمعية دبلوم كلية علوم الحاسوب</p>
+                        </div>
+                    </div>
+                    <!-- Dark Mode Mobile Button -->
+                    <button onclick="toggleDarkMode()" class="md:hidden w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-amber-300 transition">
+                        <i id="theme-icon-mobile" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                </div>
+                
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <!-- Target Phone Setting -->
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-2.5 px-4 flex items-center gap-3 border border-white/10 w-full md:w-auto">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+                        <div class="flex flex-col text-xs w-full">
+                            <span class="text-slate-300">رقم الاستلام (رئيس الجمعية / الأمين):</span>
+                            <input type="text" id="targetPhone" value="+249962466000" placeholder="مثال: 249xxxxxxxxx" class="bg-transparent text-white font-mono outline-none border-b border-emerald-400/50 focus:border-emerald-400 text-xs py-0.5 w-full">
+                        </div>
+                    </div>
+                    <!-- Dark Mode Desktop Button -->
+                    <button onclick="toggleDarkMode()" title="تبديل الوضع الليلي / النهاري" class="hidden md:flex w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 items-center justify-center text-amber-300 hover:text-amber-200 transition shrink-0">
+                        <i id="theme-icon-desktop" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex-grow w-full">
+
+        <!-- Core Objective Banner -->
+        <div class="glass-card rounded-2xl p-5 mb-8 border-r-4 border-r-emerald-600 shadow-sm relative overflow-hidden">
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-block bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full mb-2">الهدف الأساسي للمنصب</span>
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-800 dark:text-slate-100">تعزيز روح الأخوة والتكافل بين الطلاب</h2>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">العمل الدؤوب على بناء مجتمع طلابي متماسك وترابط الاجتماعي متين داخل كلية علوم الحاسوب.</p>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto justify-end">
+                    <button onclick="window.print()" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition flex items-center gap-2 border border-slate-200 dark:border-slate-700">
+                        <i class="fa-solid fa-print"></i> طباعة الصفحة
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Tabs Navigation -->
+        <div class="flex overflow-x-auto gap-2 pb-3 mb-6 scrollbar-none border-b border-slate-200 dark:border-slate-800" id="tabsHeader">
+            <button onclick="switchTab('tab-plans')" id="btn-tab-plans" class="tab-btn active px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 whitespace-nowrap text-slate-600 dark:text-slate-400">
+                <i class="fa-solid fa-calendar-check"></i> الخطط والمبادرات
+            </button>
+            <button onclick="switchTab('tab-problems')" id="btn-tab-problems" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-hand-holding-heart"></i> المشكلات والتكافل
+            </button>
+            <button onclick="switchTab('tab-greetings')" id="btn-tab-greetings" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-heart"></i> التهاني والمواساة
+            </button>
+            <button onclick="switchTab('tab-coordination')" id="btn-tab-coordination" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-people-arrows"></i> التنسيق مع الأمناء
+            </button>
+            <button onclick="switchTab('tab-reports')" id="btn-tab-reports" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-file-contract"></i> التقارير الدورية
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: الخطط والمبادرات -->
+        <section id="tab-plans" class="tab-content block space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Form: وضع الخطط والبرامج -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">رفع مقترح برنامج أو خطة اجتماعية</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">التنسيق مع رئيس الجمعية لاعتماد الخطط</p>
+                        </div>
+                    </div>
+
+                    <form onsubmit="sendProposal(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">عنوان البرامج / الخطة</label>
+                            <input type="text" id="propTitle" required placeholder="مثال: أسبوع الأنشطة الاجتماعية الرياضية" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">التاريخ المقترح</label>
+                                <input type="date" id="propDate" required class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">الفئة المستهدفة</label>
+                                <input type="text" id="propTarget" placeholder="مثال: جميع طلاب الكلية" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">تفاصيل ومحاور الخطة</label>
+                            <textarea id="propDetails" rows="3" required placeholder="اشرح الأهداف والأجندة بالتفصيل..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> إرسال المقترح لرئيس الجمعية
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Form: تنظيم المناسبات والفعاليات -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-champagne-glasses"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">تسجيل تنظيم مناسبة / نشاط خاص</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">تنظيم المناسبات والأنشطة الاجتماعية بالجمعية</p>
+                        </div>
+                    </div>
+
+                    <form onsubmit="sendEventOrg(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">اسم الفعالية / المناسبة</label>
+                            <input type="text" id="eventTitle" required placeholder="مثال: اليوم التعارفي لطلاب الدفعة الجديدة" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">مكان الإقامة</label>
+                                <input type="text" id="eventLocation" required placeholder="المسرح الرئيسي / القاعة 4" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">الميزانية التقديرية</label>
+                                <input type="text" id="eventBudget" placeholder="مثال: تحتاج دعم لوجستي فقط" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">الاحتياجات التنظيمية واللوجستية</label>
+                            <textarea id="eventNeeds" rows="3" required placeholder="سماعات، ضيافة، تكريمات..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i> إرسال نموذج التنظيم عبر الواتساب
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 2: المشكلات والتكافل -->
+        <section id="tab-problems" class="tab-content hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Form: متابعة مشكلات الطلاب -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">متابعة مشكلة اجتماعية لطالب</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">رفع الحالة لرئيس الجمعية للعمل على معالجتها بكل سرية</p>
+                        </div>
+                    </div>
+
+                    <form onsubmit="sendProblem(event)" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">اسم الطالب (اختياري للسرية)</label>
+                                <input type="text" id="studentName" placeholder="يمكن تركه فارغاً" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">المستوى الدراسي</label>
+                                <input type="text" id="studentLevel" placeholder="مثال: المستوى الثاني" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">تصنيف المشكلة</label>
+                            <select id="problemType" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="أكاديمية - اجتماعية">أكاديمية ذات بعد الاجتماعي</option>
+                                <option value="مادية / رسوم">مادية / رسوم دراسية</option>
+                                <option value="ظروف صحية / طارئة">ظروف صحية / طارئة</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">وصف المشكلة وتوصية الأمين الاجتماعي</label>
+                            <textarea id="problemDesc" rows="3" required placeholder="شرح الحالة والتوصية المناسبة للحل..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> رفع الحالة السرية لرئيس الجمعية
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Form: مبادرات التكافل الاجتماعي والدعم -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-hands-holding-child"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">مبادرة تكافل / دعم في الأزمات</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">تنظيم وتفعيل الصناديق والمبادرات الأخوية</p>
+                        </div>
+                    </div>
+
+                    <form onsubmit="sendSolidarity(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">عنوان المبادرة التكافلية</label>
+                            <input type="text" id="soliTitle" required placeholder="مثال: حملة دعم رسوم الطلاب المستحقين" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">طبيعة الدعم المستهدف</label>
+                            <input type="text" id="soliType" required placeholder="مالي، عيني، تبرع بالدم، كتب ومذكرات" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">آلية التنفيذ والجمع واللتوزيع</label>
+                            <textarea id="soliPlan" rows="3" required placeholder="كيف سيتم جمع الدعم وتوزيعه بشفافية..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> إرسال المبادرة للرئيس واللجنة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 3: التهاني والمواساة -->
+        <section id="tab-greetings" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-sm max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">تهنئة أو مواساة للطلاب</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">تهنئة النجاح والتخرج، أو المواساة في حالات المرض والوفاة</p>
+                    </div>
+                </div>
+
+                <form onsubmit="sendGreeting(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">نوع المناسبة</label>
+                            <select id="greetType" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="تهنئة نجاح"> تهنئة نجاح</option>
+                                <option value="تهنئة تخرج">🎓 تهنئة تخرج</option>
+                                <option value="عيادة مريض / سلامة"> عيادة مريض / سلامة</option>
+                                <option value="تعزية ومواساة وفاة">🖤 تعزية ومواساة وفاة</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">اسم الطالب / الجهة المعنية</label>
+                            <input type="text" id="greetTarget" required placeholder="مثال: الطالب/ة..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">نص الرسالة / البرقية الرسمية</label>
+                        <textarea id="greetText" rows="4" required placeholder="تتقدم أمانة الشؤون الاجتماعية بخالص التهاني / التعازي..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                    </div>
+
+                    <div class="p-3 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 rounded-xl text-xs text-purple-800 dark:text-purple-300 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-base"></i>
+                        <span>ستقوم الأمانة بنشر هذه البرقية في المجموعات الرسمية للكلية بعد مراجعتها.</span>
+                    </div>
+
+                    <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> إرسال البرقية عبر الواتساب للنشر
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 4: التنسيق مع باقي الأمناء -->
+        <section id="tab-coordination" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-sm max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">التنسيق المشترك مع الأمناء والليدرات</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">تنفيذ الأنشطة والمبادرات الاجتماعية المشتركة بين الأمانات</p>
+                    </div>
+                </div>
+
+                <form onsubmit="sendCoordination(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">الأمانة / الممثل المستهدف</label>
+                            <select id="coordTarget" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="رئيس الجمعية">رئيس الجمعية</option>
+                                <option value="الأمانة الثقافية">الأمانة الثقافية</option>
+                                <option value="الأمانة الرياضية">الأمانة الرياضية</option>                                <option value="أمانة الإعلام">أمانة الإعلام</option>
+                                <option value="أمانة المالية">أمانة المالية</option>
+                                <option value="ليدرات الدفعات">ليدرات الدفعات</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">موضوع التنسيق والمبادرة</label>
+                            <input type="text" id="coordSubject" required placeholder="مثال: تنظيم الدوري الرياضي الخيري" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">الأدوار المطلوبة والمقترحة</label>
+                        <textarea id="coordRoles" rows="3" required placeholder="تحديد المهام المشتركة بين الأمانات..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> إرسال طلب التنسيق عبر الواتساب
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 5: التقارير الدورية -->
+        <section id="tab-reports" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-sm max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">تقديم التقرير الدوري لرئيس الجمعية</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">متابعة دقيقة للأنشطة، الإنجازات، والتحديات الاجتماعية</p>
+                    </div>
+                </div>
+
+                <form onsubmit="sendReport(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">الفترة الزمنية للتقرير</label>
+                            <input type="text" id="repPeriod" required placeholder="مثال: تقرير شهر أكتوبر 2026" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">عدد الفعاليات/الحالات المنجزة</label>
+                            <input type="number" id="repCount" placeholder="مثال: 5 أنشطة" class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">أبرز الإنجازات والأنشطة المنفذة</label>
+                        <textarea id="repAchievements" rows="3" required placeholder="تم إنجاز وتدشين..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">التحديات والمعوقات المقترحة للحل</label>
+                        <textarea id="repChallenges" rows="2" placeholder="أبرز الصعوبات التي واجهت الأمانة..." class="w-full text-sm p-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i> إرسال التقرير الدوري لرئيس الجمعية
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Signature Stamp Section -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-bold text-slate-700 dark:text-slate-300">جميع المراسلات تعتمد مع التوقيع التلقائي للأمانة الاجتماعية</p>
+            <div class="inline-block p-3 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-right">
+                <p class="font-bold text-emerald-600 dark:text-emerald-400">الأمين الاجتماعي | جمعية دبلوم كلية علوم الحاسوب</p>
+                <p class="text-slate-800 dark:text-slate-200 font-bold">م/ عبدالرحمن عبدالحليم الشاذلي</p>
+                
+            </div>
+            <p>© 2026 جميع الحقوق محفوظة لجمعية دبلوم كلية علوم الحاسوب</p>
+        </div>
+    </footer>
+
+    <!-- Logic JavaScript Controls -->
+    <script>
+        // Official Signature Constant
+        const SIGNATURE = `\n\n📌 *دمتم بدوام التكافل والارتقاء*\n*الأمين الاجتماعي | جمعية دبلوم كلية علوم الحاسوب*\n*م/ عبدالرحمن عبدالحليم الشاذلي*\n`;
+
+        // Dark Mode Logic
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const iconMobile = document.getElementById('theme-icon-mobile');
+            const iconDesktop = document.getElementById('theme-icon-desktop');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                iconMobile.className = 'fa-solid fa-moon text-lg';
+                iconDesktop.className = 'fa-solid fa-moon text-lg';
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                iconMobile.className = 'fa-solid fa-sun text-lg';
+                iconDesktop.className = 'fa-solid fa-sun text-lg';
+            }
+        }
+
+        // Init Saved Theme
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-icon-mobile').className = 'fa-solid fa-sun text-lg';
+            document.getElementById('theme-icon-desktop').className = 'fa-solid fa-sun text-lg';
+        }
+
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // Get Target Whatsapp Number
+        function getPhone() {
+            let phone = document.getElementById('targetPhone').value.replace(/[^0-9]/g, '');
+            return phone ? phone : "249962466000";
+        }
+
+        // Send Handlers for WhatsApp
+        function sendProposal(e) {
+            e.preventDefault();
+            const title = document.getElementById('propTitle').value;
+            const date = document.getElementById('propDate').value;
+            const target = document.getElementById('propTarget').value || "طلاب الكلية";
+            const details = document.getElementById('propDetails').value;
+
+            const text = `💡 *رفع مقترح برنامج / خطة اجتماعية*\n\n📌 *العنوان:* ${title}\n📅 *التاريخ المقترح:* ${date}\n🎯 *الفئة المستهدفة:* ${target}\n📝 *التفاصيل:* ${details}` + SIGNATURE;
+            window.open(`https://wa.me/${getPhone()}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function sendEventOrg(e) {
+            e.preventDefault();
+            const title = document.getElementById('eventTitle').value;
+            const loc = document.getElementById('eventLocation').value;
+            const budget = document.getElementById('eventBudget').value || "غير محددة";
+            const needs = document.getElementById('eventNeeds').value;
+
+            const text = `🎉 *تنظيم مناسبة / نشاط اجتماعي*\n\n📌 *المناسبة:* ${title}\n📍 *المكان:* ${loc}\n💰 *الميزانية/الدعم:* ${budget}\n📦 *الاحتياجات اللوجستية:* ${needs}` + SIGNATURE;
+            window.open(`https://wa.me/${getPhone()}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function sendProblem(e) {
+            e.preventDefault();
+            const name = document.getElementById('studentName').value || " غير محدد ";
+            const level = document.getElementById('studentLevel').value || "غير محدد";
+            const type = document.getElementById('problemType').value;
+            const desc = document.getElementById('problemDesc').value;
+
+            const text = `🔒 *متابعة مشكلة اجتماعية لطالب (سرية)*\n\n👤 *الحالة:* ${name} (${level})\n🏷️ *التصنيف:* ${type}\n📝 *التفاصيل والتوصيات:* ${desc}` + SIGNATURE;
+            window.open(`https://wa.me/${getPhone()}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function sendSolidarity(e) {
+            e.preventDefault();
+            const title = document.getElementById('soliTitle').value;
+            const type = document.getElementById('soliType').value;
+            const plan = document.getElementById('soliPlan').value;
+
+            const text = `🤝 *مبادرة تكافل ودعم في الأزمات*\n\n📌 *المبادرة:* ${title}\n🎯 *طبيعة الدعم:* ${type}\n📝 *آلية التنفيذ والجمع:* ${plan}` + SIGNATURE;
+            window.open(`https://wa.me/${getPhone()}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function sendGreeting(e) {
+            e.preventDefault();
+            const type = document.getElementById('greetType').value;
+            const target = document.getElementById('greetTarget').value;
+            const msgText = document.getElementById('greetText').value;
+
+            const text = `💌 *برقية رسمية - ${type}*\n\n👤 *الموجه له/ـا:* ${target}\n\n${msgText}` + SIGNATURE;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function sendCoordination(e) {
+            e.preventDefault();
+            const target = document.getElementById('coordTarget').value;
+            const subject = document.getElementById('coordSubject').value;
+            const roles = document.getElementById('coordRoles').value;
+
+            const text = `🌐 *طلب تنسيق مشترك بين الأمانات*\n\nموجّه إلى: *${target}*\n📌 *الموضوع:* ${subject}\n📝 *الأدوار والمهام المشتركة:* ${roles}` + SIGNATURE;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function sendReport(e) {
+            e.preventDefault();
+            const period = document.getElementById('repPeriod').value;
+            const count = document.getElementById('repCount').value || "0";
+            const ach = document.getElementById('repAchievements').value;
+            const chall = document.getElementById('repChallenges').value || "لا توجد معوقات رئيسية";
+
+            const text = `📊 *التقرير الدوري للأمانة الاجتماعية*\n🗓️ *الفترة:* ${period}\n🔢 *عدد الأنشطة/الحالات:* ${count}\n\n✅ *أبرز الإنجازات والأنشطة:*\n${ach}\n\n⚠️ *التحديات والتوصيات:*\n${chall}` + SIGNATURE;
+            window.open(`https://wa.me/${getPhone()}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
